@@ -1,12 +1,54 @@
-"""post application module."""
+"""post admin classes"""
 
+#Django
 from django.contrib import admin
-from django.apps import AppConfig
 
-# Register your models here.
+#Models
+from posts.models import Post
 
-class PostsConfig(AppConfig):
-    """Posts application settings."""
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    """Post Admin"""
     
-    name="posts"
-    varbose_name = "Posts"
+    list_display = (
+        'pk', 
+        'user', 
+        'profile', 
+        'title', 
+        'photo'
+        )
+    
+    list_display_links = (
+        'pk', 
+        'user'
+        )
+
+    search_fields= (
+        'user__username', 
+        'title',
+        )
+
+    list_filter = (
+        'created',
+        'modified',
+        'user__is_active',
+        'user__is_staff'
+    )
+
+    readonly_fields = ('created', 'modified', 'user')
+
+    fieldsets = (
+        ('Post', {
+            'fields': (('title', 'photo'),)
+        }),
+
+        ('Metadata', {
+            'fields': (
+                ('user'),
+                ('created', 'modified'),
+            )
+        })
+    )
+
+
+
