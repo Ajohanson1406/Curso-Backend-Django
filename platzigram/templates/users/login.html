@@ -1,23 +1,28 @@
 {% extends "users/base.html" %}
 
 {% block head_content %}
-<title>Platzigram/Log in</title>
+<title>Ingresar | Crear cuenta Platzigram</title>
 {% endblock%}
 
 {% block container %}
 
-{% if error %}
-<p style="color: red" action="{% url 'login' %}">{{error}}</p>
-{% endif%}
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+     {{ error }}
+     </div>
+    {% endif%}
 
 <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
+    <div class="form-group">
+        <input type="text" class="form-control" type="text" placeholder="Username" name="username">
+    </div>
 
     <div class="form-group">
-        <input class="form-control mb-2" type="text" placeholder="Username" name="username"/>
-    <input class="form-control" type="password" placeholder="Password" name="password"/>
+        <input class="form-control" type="password" placeholder="Password" name="password"/>
+    </div>
 
     <button class="btn btn-primary btn-block" type="submit">Sign in</button>
-    </div>
+   
 </form>
 {% endblock%}
