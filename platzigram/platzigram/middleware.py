@@ -24,8 +24,8 @@ class ProfileCompletionMiddleare:
             if not request.user.is_staff:
                 profile = request.user.profile
                 if not profile.picture or not profile.biography:
-                    if request.path not in [reverse('update_profile'), reverse('logout')] and not request.path.startswith('/admin/'):
-                        return redirect('update_profile')
+                    if request.path not in [reverse('users:update_profile'), reverse('users:logout')] and not request.path.startswith('/admin/'):
+                        return redirect('users:update_profile')
 
         # Code to be executed for each request/response after
         # the view is called.
