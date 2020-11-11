@@ -2,7 +2,6 @@
 
 #Django
 from django.urls import path
-from django.views.generic import TemplateView
 
 #Views 
 from users import views
@@ -11,7 +10,7 @@ urlpatterns = [
 
     path(
         route='profile/<str:username>/',
-        view=TemplateView.as_view(template_name='users/detail.html'),
+        view=views.UserDetailView.as_view(),
         name='detail'
     ),
 
@@ -19,7 +18,7 @@ urlpatterns = [
 
         route='login/', 
 
-        view=views.login_view, 
+        view=views.LoginView.as_view(), 
 
         name="login"),
                                     
@@ -27,7 +26,7 @@ urlpatterns = [
 
         route='logout/',
 
-        view=views.logout_view, 
+        view=views.LogoutView.as_view(), 
 
         name="logout"),
 
@@ -35,7 +34,7 @@ urlpatterns = [
 
         route='signup/',
 
-        view=views.signup, 
+        view=views.UserSignUpView.as_view(), 
 
         name="signup"),
 
@@ -43,7 +42,7 @@ urlpatterns = [
 
         route='me/profile/', 
 
-        view=views.update_profile, 
+        view=views.UserUpdateView.as_view(), 
 
         name="update_profile")
 ]
